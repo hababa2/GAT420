@@ -23,13 +23,13 @@ public class RaycastPerception : Perception
                         {
                                 if (tagName == "" || raycastHit.collider.CompareTag(tagName))
                                 {
-                                        Debug.DrawRay(ray.origin, ray.direction * raycastHit.distance, Color.red);
+                                        //Debug.DrawRay(ray.origin, ray.direction * raycastHit.distance, Color.red);
                                         result.Add(raycastHit.collider.gameObject);
                                 }
                         }
                         else
                         {
-                                Debug.DrawRay(ray.origin, ray.direction * distance, Color.white);
+                                //Debug.DrawRay(ray.origin, ray.direction * distance, Color.white);
                         }
                 }
 

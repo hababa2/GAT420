@@ -4,4 +4,5 @@ using UnityEngine;
 
 public abstract class Agent : MonoBehaviour
 {
+	public Movement movement;
 }

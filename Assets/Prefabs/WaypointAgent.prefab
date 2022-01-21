@@ -140,14 +140,12 @@ GameObject:
   - component: {fileID: 2787027191259761332}
   - component: {fileID: 2787027191259761335}
   - component: {fileID: 2787027191259761334}
-  - component: {fileID: 2787027191259761330}
-  - component: {fileID: 4927740718127536129}
-  - component: {fileID: 7310421255572423157}
-  - component: {fileID: 2787027191259761329}
-  - component: {fileID: 2787027191259761328}
+  - component: {fileID: 3461132503271045970}
+  - component: {fileID: 5357562562815478956}
+  - component: {fileID: -1518720017986478798}
   m_Layer: 0
-  m_Name: Agent
-  m_TagString: Agent1
+  m_Name: WaypointAgent
+  m_TagString: WaypointAgent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,7 +195,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e21abda39b78434428eb390bcde473df, type: 2}
+  - {fileID: 2100000, guid: c7b9923bdb3e7f14fba8bcad4516b2f9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -233,7 +231,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2787027191259761330
+--- !u!114 &3461132503271045970
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,15 +240,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2787027191259761337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a862d492226fc3a48b476f9c3f058d22, type: 3}
+  m_Script: {fileID: 11500000, guid: e5a1d68e992eedb4e9886226d59a78b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perception: {fileID: 4927740718127536129}
-  flockPerception: {fileID: 2787027191259761329}
-  obstaclePerception: {fileID: 7310421255572423157}
-  steering: {fileID: 2787027191259761328}
-  agentData: {fileID: 11400000, guid: 8f1579d25a671b24f8d1b79f27ea1e13, type: 2}
---- !u!114 &4927740718127536129
+  movementData: {fileID: 11400000, guid: 32a97b191d5071c4ebe3035f5ca8c82e, type: 2}
+--- !u!114 &5357562562815478956
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -259,59 +253,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 2787027191259761337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6c57a8d5506812449623f37124953f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 89941555771485642833369480caa9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagName: Player
-  raycastTransform: {fileID: 6045798078219565046}
-  distance: 10
-  angle: 90
-  numRaycast: 20
---- !u!114 &7310421255572423157
-MonoBehaviour:
+  movement: {fileID: 3461132503271045970}
+  initialNode: {fileID: 0}
+--- !u!54 &-1518720017986478798
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2787027191259761337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0685d0e0a45d1c4b94704ed72b64c63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distance: 5
-  radius: 1
-  numRaycast: 20
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
---- !u!114 &2787027191259761329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2787027191259761337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5f6694ed029c954a91430c58e08ae13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tagName: Agent1
-  radius: 5
-  maxAngle: 180
---- !u!114 &2787027191259761328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2787027191259761337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f0184f03ccf85a45ab2130e0d98c05d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wanderDisplacement: 5
-  wanderRadius: 3
-  wanderDistance: 1
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
