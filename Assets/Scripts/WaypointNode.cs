@@ -8,20 +8,12 @@ public class WaypointNode : Node
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if(other.gameObject.TryGetComponent(out SearchAgent searchAgent))
+		if (other.gameObject.TryGetComponent<SearchAgent>(out SearchAgent searchAgent))
 		{
-			if(searchAgent.targetNode == this)
+			if (searchAgent.targetNode == this)
 			{
 				searchAgent.targetNode = nextWaypoints[Random.Range(0, nextWaypoints.Length)];
 			}
 		}
 	}
-
-	public static WaypointNode GetRandomWaypoint()
-	{
-		var waypoints = GetNodes<WaypointNode>();
-
-		return (waypoints == null) ? null : waypoints[Random.Range(0, waypoints.Length)];
-	}
-
 }

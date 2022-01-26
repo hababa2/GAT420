@@ -141,8 +141,8 @@ GameObject:
   - component: {fileID: 2787027191259761335}
   - component: {fileID: 2787027191259761334}
   - component: {fileID: 3461132503271045970}
-  - component: {fileID: 5357562562815478956}
   - component: {fileID: -1518720017986478798}
+  - component: {fileID: 4742160551857565207}
   m_Layer: 0
   m_Name: WaypointAgent
   m_TagString: WaypointAgent
@@ -244,20 +244,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementData: {fileID: 11400000, guid: 32a97b191d5071c4ebe3035f5ca8c82e, type: 2}
---- !u!114 &5357562562815478956
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2787027191259761337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89941555771485642833369480caa9c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movement: {fileID: 3461132503271045970}
-  initialNode: {fileID: 0}
 --- !u!54 &-1518720017986478798
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -274,3 +260,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &4742160551857565207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2787027191259761337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5490236c02392224a88b7467f3c11c36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 3461132503271045970}
+  initialNode: {fileID: 0}

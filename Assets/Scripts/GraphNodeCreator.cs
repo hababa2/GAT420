@@ -9,52 +9,39 @@ public class GraphNodeCreator : MonoBehaviour
 	public LayerMask layerMask;
 	public float neighborRadius = 3;
 	public float grid = 2;
-	public GraphNodeSelector selector;
 
 	void Update()
 	{
-		if ((Input.GetMouseButtonDown(1) || 
-			(Input.GetMouseButton(1) && Input.GetKey(KeyCode.LeftControl))) && 
-			selector.IsActive == false)
+		if ((Input.GetMouseButtonDown(1) ||
+			(Input.GetMouseButton(1) && Input.GetKey(KeyCode.LeftControl))))
 		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			if (Physics.Raycast(ray, out RaycastHit hitInfo, 100))
+			Vector3 position = Vector3.zero;
+			if (Utilities.ScreenToWorld(Input.mousePosition, layerMask, ref position))
 			{
-				// check if hit layer mask
-				if (((1 << hitInfo.collider.gameObject.layer) & layerMask) == 0) return;
-
-				// set position on grid
-				Vector3 position = hitInfo.point;
-				if (grid != 0)
+				position = Utilities.SnapToGrid(position, Vector3.one * grid);
+				// make sure position doesn't have a node already
+				if (Physics.CheckSphere(position, grid * 0.25f, 1 << nodePrefab.layer))
 				{
-					position.x = Mathf.FloorToInt(position.x / grid) * grid;
-					position.z = Mathf.FloorToInt(position.z / grid) * grid;
-					
-					// make sure position doesn't have a node already
-					if (Physics.CheckSphere(position, grid * 0.5f, 1 << nodePrefab.layer))
-					{
-						return;
-					}
+					return;
 				}
 
-				// create node
-				Instantiate(nodePrefab, position, Quaternion.identity, transform);
+				Ray ray = new Ray(Camera.main.transform.position, position - Camera.main.transform.position); //Camera.main.ScreenPointToRay(Input.mousePosition);
 
-				// unlink/link nodes within radius
-				GraphNode.UnlinkNodes();
-				GraphNode.LinkNodes(neighborRadius);
+				if (Physics.Raycast(ray, out RaycastHit hitInfo, 100))
+				{
+					// check if hit layer mask
+					if (((1 << hitInfo.collider.gameObject.layer) & layerMask) == 0) return;
+
+					// create node
+					Instantiate(nodePrefab, position, Quaternion.identity, transform);
+
+					// unlink/link nodes within radius
+					GraphNode.UnlinkNodes();
+					GraphNode.LinkNodes(neighborRadius);
+				}
 			}
 		}
 	}
 
-	public void ClearNodes()
-	{
-		var nodes = Node.GetNodes<GraphNode>();
-		nodes.ToList().ForEach(node => Destroy(node.gameObject));
 
-		//foreach (var node in nodes)
-		//{
-		//	Destroy(node.gameObject);
-		//}
-	}
 }
